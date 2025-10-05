@@ -1,3 +1,5 @@
+mod main_1;
+
 use chrono::NaiveDate;
 use serde::Deserialize;
 
@@ -151,8 +153,7 @@ fn run_strategy(ohlcv: &[Ohlcv], symbol: &str) -> BacktestResult {
             }
         }
     }
-
-    // If position left open, close at last price
+    
     if let Some(mut tr) = current {
         let last_price = *closes.last().unwrap();
         tr.exit_price = Some(last_price);
