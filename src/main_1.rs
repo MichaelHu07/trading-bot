@@ -3,7 +3,7 @@ use serde::Deserialize;
 
 
 #[derive(Debug, Deserialize, Clone)]
-struct opnHiLoClseVol {
+struct OpnHiLoClseVol {
     #[serde(with = "chrono::naive::serde::ts_milliseconds", default)]
     #[serde(skip_deserializing)]
     _ts: Option<NaiveDate>,
@@ -21,11 +21,11 @@ struct opnHiLoClseVol {
     volume: f64,
 }
 
-fn read_csv(path: &str) -> csv::Result<Vec<opnHiLoClseVol>> {
+fn read_csv(path: &str) -> csv::Result<Vec<OpnHiLoClseVol>> {
     let mut rdr = csv::Reader::from_path(path)?;
-    let mut rows: Vec<opnHiLoClseVol> = Vec::new();
+    let mut rows: Vec<OpnHiLoClseVol> = Vec::new();
     for result in rdr.deserialize() {
-        let mut rec: opnHiLoClseVol = result?;
+        let mut rec: OpnHiLoClseVol = result?;
         rec.date = rec.date.trim().to_string();
         rows.push(rec);
     }
